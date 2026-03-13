@@ -1,0 +1,42 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+      - echo "Dependencies installed successfully"
+  
+  pre_build:
+    commands:
+      - echo "Running tests..."
+      - npm test
+      - echo "Tests completed successfully"
+  
+  build:
+    commands:
+      - echo "Build started on $(date)"
+      - echo "Testing internet connectivity via NAT Gateway..."
+      - curl -I https://aws.amazon.com
+      - echo "Internet connectivity confirmed!"
+      - echo "Creating build artifact..."
+      - echo "Build completed at $(date)" > build-info.txt
+      - echo "Node version: $(node --version)" >> build-info.txt
+      - echo "NPM version: $(npm --version)" >> build-info.txt
+  
+  post_build:
+    commands:
+      - echo "Build completed on $(date)"
+      - echo "Uploading artifact to S3..."
+      - zip -r build-output.zip index.js package.json build-info.txt
+      - aws s3 cp build-output.zip s3://YOUR-BUCKET-NAME/builds/build-output-$(date +%Y%m%d-%H%M%S).zip
+      - echo "Artifact uploaded successfully"
+
+artifacts:
+  files:
+    - index.js
+    - package.json
+    - build-info.txt
+  name: codebuild-vpc-nat-demo-$(date +%Y%m%d-%H%M%S)

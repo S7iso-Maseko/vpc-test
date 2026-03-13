@@ -1,0 +1,11 @@
+{
+  "name": "codebuild-vpc-nat-demo",
+  "version": "1.0.0",
+  "description": "Demo app to test CodeBuild with VPC and NAT Gateway",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
