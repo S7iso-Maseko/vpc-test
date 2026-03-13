@@ -31,7 +31,7 @@ phases:
       - echo "Build completed on $(date)"
       - echo "Uploading artifact to S3..."
       - zip -r build-output.zip index.js package.json build-info.txt
-      - aws s3 cp build-output.zip s3://YOUR-BUCKET-NAME/builds/build-output-$(date +%Y%m%d-%H%M%S).zip
+      - aws s3 cp build-output.zip s3://another-test-bucket-007/builds/build-output-$(date +%Y%m%d-%H%M%S).zip
       - echo "Artifact uploaded successfully"
 
 artifacts:
