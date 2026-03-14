@@ -23,8 +23,8 @@ phases:
       - echo "Internet connectivity confirmed!"
       - echo "Creating build artifact..."
       - echo "Build completed at $(date)" > build-info.txt
-      - echo "Node version: $(node --version)" >> build-info.txt
-      - echo "NPM version: $(npm --version)" >> build-info.txt
+      # - echo "Node version: $(node --version)" >> build-info.txt
+      # - echo "NPM version: $(npm --version)" >> build-info.txt
   
   post_build:
     commands:
